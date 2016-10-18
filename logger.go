@@ -24,5 +24,5 @@ func (l *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.Ha
 	next(rw, r)
 
 	res := rw.(ResponseWriter)
-	l.Printf("Now is %s, %s, %s, %s, %v, %s, %v", time.Now().Format("2006-01-02:15:04:05"), r.Header.Get("token"), r.Method, r.RequestURI, res.Status(), http.StatusText(res.Status()), time.Since(start))
+	l.Printf("%v %s %s %s %v %v %s", time.Now().Unix(), r.Header.Get("token"), r.Method, r.RequestURI, res.Status(), time.Since(start).Nanoseconds(), r.Header.Get("trackid"))
 }
